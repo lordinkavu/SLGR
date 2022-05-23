@@ -8,9 +8,27 @@ const debounce = (callback, wait) => {
   };
 };
 
+const displayElement = document.getElementById('alpha-display');
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
+
+const debouncedFetch = debounce((arr) => {
+  if (arr.length === 0) {
+    displayElement.innerHTML = '';
+  } else {
+    fetch(`http://127.0.0.1:5000/predict`, {
+      method: 'POST',
+      body: JSON.stringify(arr),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => (displayElement.innerHTML = data.result))
+      .catch((e) => console.log(e.message));
+  }
+}, 0);
 
 function onResults(results) {
   canvasCtx.save();
@@ -23,19 +41,17 @@ function onResults(results) {
     canvasElement.height
   );
   const landmarks = results.multiHandLandmarks[0];
-  if (landmarks) {
+
+  if (landmarks && landmarks.length) {
     const arr = [];
     landmarks.forEach((landmark) => {
       arr.push(landmark.x, landmark.y, landmark.z);
     });
-    fetch(`http://127.0.0.1:5000/predict`, {
-      method: 'POST',
-      body: JSON.stringify(arr),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    debouncedFetch(arr);
+  } else {
+    displayElement.innerHTML = '';
   }
+
   drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {
     color: '#00FF00',
     lineWidth: 5,

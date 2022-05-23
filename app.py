@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 import pickle
 
 
@@ -39,12 +39,11 @@ def alpha_predictor():
     if request.method == 'POST':
         body = request.get_json()
         prediction = loaded_model.predict([body])
-        print(alpha_map[prediction[0]])
-        return "Success", 200
+        return jsonify({"result": alpha_map[prediction[0]]}), 200
     else:
         return render_template('predict.html')
 
 
-@app.route("/")
+@ app.route("/")
 def hello_world():
     return "<p>Hello, World!</p>"
