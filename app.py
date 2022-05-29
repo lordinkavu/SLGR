@@ -34,7 +34,7 @@ alpha_map = {
 app = Flask(__name__)
 
 
-@app.route("/predict", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def alpha_predictor():
     if request.method == 'POST':
         body = request.get_json()
@@ -44,6 +44,3 @@ def alpha_predictor():
         return render_template('predict.html')
 
 
-@ app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"

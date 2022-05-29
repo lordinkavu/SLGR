@@ -4,8 +4,10 @@
         <meta charset="utf-8">
         <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils_3d/control_utils_3d.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+
         <link rel="stylesheet" href="/static/style.css">
     </head>
 
@@ -13,8 +15,12 @@
         <div class="container">
             <video class="input_video" style="display:none"></video>
             <div style="font-weight:800;">Sign Language Gesture Recognition System</div>
-           <div> <canvas class="output_canvas" width="500px" height="500px"></canvas><div id="alpha-display"></div></div>
-            
+            <div>
+                <canvas class="output_canvas" width="400px" height="400px"></canvas>
+                <div class="landmark-grid-container"></div>
+                <div id="alpha-display"></div>
+            </div>
+
         </div>
         <script src="/static/script.js"></script>
     </body>

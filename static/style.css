@@ -19,12 +19,21 @@ body {
 }
 
 #alpha-display {
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: xxx-large;
   font-weight: bolder;
   border: 1px solid black;
+}
+
+.landmark-grid-container {
+  width: 400px;
+  height: 400px;
+  background-color: #99999999;
+}
+.landmark-label-js {
+  display: none;
 }
